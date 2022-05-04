@@ -16,3 +16,5 @@ jobs:
     - run: npm test
       env:
         CI: true
+        AUTH_EMAIL: ${{ secrest.AUTH_EMAIL }}
+        AUTH_PASSWORD: ${{ secrets.AUTH_PASSWORD }}
