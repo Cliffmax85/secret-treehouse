@@ -16,15 +16,23 @@ export default function Login() {
   const { from } = location.state || { from: { pathname: '/' } };
 
   const handleLogin = (event) => {
+    try {
+    
     event.preventDefault();
     const loginWasSuccessful = auth.login(formState.email, formState.password);
 
-    // TODO: If login was unsuccessful, set an error with a message
-    // to display to the user that their login failed.
-    //
+      loginWasSuccessful();
+      history.replace(from);
     // If login was successful, use the history hook
     // from React Router to replace the current URL with the URL
     // we need to redirect to.
+      
+    } catch (error) {
+      setError(error.message)
+    }
+    // TODO: If login was unsuccessful, set an error with a message
+    // to display to the user that their login failed.
+    //
     // See https://v5.reactrouter.com/web/api/history for the appropriate method to use
   };
 
@@ -37,12 +45,16 @@ export default function Login() {
           id="email"
           name="email"
           type="email"
+          value={formState.email}
+          onChange={(e) => handleFormChange(e)}
         />{' '}
         <label>Password</label>
         <input
           id="password"
           name="password"
           type="password"
+          value={formState.password}
+          onChange={(e) => handleFormChange(e)}
         />
         <button type="submit" aria-label="Sign In">
           Sign in
