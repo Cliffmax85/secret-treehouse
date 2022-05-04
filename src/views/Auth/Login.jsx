@@ -18,7 +18,7 @@ export default function Login() {
   const handleLogin = (event) => {
     event.preventDefault();
     const loginWasSuccessful = auth.login(formState.email, formState.password);
-
+    
   
     // If login was successful, use the history hook
     // from React Router to replace the current URL with the URL
